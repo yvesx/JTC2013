@@ -55,9 +55,9 @@ if __name__ == "__main__":
 	N = int(sys.argv[2])
 	stg = sim.readStrategy(sys.argv[1],N)
 
-	if N > 10000:
+	if N > 1000:
 		q_vect = solveSparseStrategy(stg,N)
 	else:
 		q_vect = solveStrategy(stg,N)
 	print q_vect
-	print "Qs: %s"%((sum(q_vect)-1.0)/(N-1))
+	print "Qs: %.9f"%((sum(q_vect)-1.0)/(N-1))
