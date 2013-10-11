@@ -36,9 +36,10 @@ def genConStg(N,max_arr): # increasing p=0 prob.
 	return max_arr
 
 
-def geBbfStg(N,max_arr): # back-back-forward strategy
-	for i in xrange(N-4):
-		if (i+1)%3 == 0:
+def geBbfStg(N,max_arr, step, p): # back-back-forward strategy
+	# step = 3 default
+	for i in xrange(N-(step+1)):
+		if (i+1)%step == 0 and random.random() < p:
 			max_arr[i+1][1] = 1
 	return max_arr
 
@@ -56,7 +57,8 @@ if __name__ == "__main__":
 	N = int(sys.argv[1])
 	writeStg("n%sstg_mx.csv"%(N),genMaxStg(N))
 	writeStg("n%sstg_mid.csv"%(N),genMidStg(N))
-	writeStg("n%sstg_bbf.csv"%(N),geBbfStg(N,genMaxStg(N)))
+	writeStg("n%sstg_bbf.csv"%(N),geBbfStg(N,genMaxStg(N),3,1))
+	writeStg("n%sstg_bbf05.csv"%(N),geBbfStg(N,genMaxStg(N),3,0.5))	
 	writeStg("n%sstg_con.csv"%(N),genConStg(N,genMaxStg(N)))
 	writeStg("n%sstg_rdm37.csv"%(N),geRdmStg(N,genMaxStg(N),0.37))
 	writeStg("n%sstg_rdm87.csv"%(N),geRdmStg(N,genMaxStg(N),0.87))
