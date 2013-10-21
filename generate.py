@@ -10,11 +10,12 @@ from numpy import genfromtxt
 import math
 import json
 
-def genMaxStg(N): # the max strategy
+def genMaxStg(N,scale=1.0): # the max strategy
 	arr = list()
 	for i in xrange(N-1):
 		X = i + 1
-		B = min([X,N-X])
+		B = math.floor(min([X,N-X])*scale)
+		B = max([1,B])
 		arr.append([X,B])
 	return arr
 
@@ -56,6 +57,8 @@ def writeStg(filename,arr):
 if __name__ == "__main__":
 	N = int(sys.argv[1])
 	writeStg("n%sstg_mx.csv"%(N),genMaxStg(N))
+	writeStg("n%sstg_mx37.csv"%(N),genMaxStg(N,0.37))
+	writeStg("n%sstg_mx50.csv"%(N),genMaxStg(N,0.5))
 	writeStg("n%sstg_mid.csv"%(N),genMidStg(N))
 	writeStg("n%sstg_bbf.csv"%(N),geBbfStg(N,genMaxStg(N),3,1))
 	writeStg("n%sstg_bbf05.csv"%(N),geBbfStg(N,genMaxStg(N),3,0.5))	
