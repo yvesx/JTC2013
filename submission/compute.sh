@@ -1,6 +1,6 @@
 #!/bin/bash
-N=5
-FILES=./n5stg*.csv
+N=1024
+FILES=./n1024stg*.csv
 for f in $FILES
 do
 	echo "$f"
